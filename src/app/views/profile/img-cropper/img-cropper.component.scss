@@ -1,0 +1,25 @@
+
+
+.imgcropper {
+    width: 210px;
+    height: 200px;
+    border: 1px groove black;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.imgcrop {
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    transition:transform 500ms;
+    transform-origin:top left;
+}
+
+.imgcrop2 {
+    position: absolute;
+    border-radius: 100%;
+    border: 2px groove #390085;
+    width: 180px;
+    height: 180px;
+}

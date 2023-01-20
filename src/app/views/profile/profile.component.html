@@ -1,0 +1,141 @@
+<form [formGroup]="nForm" (ngSubmit)="onSave()" *ngIf="nForm != null">
+    <div class="row py-2">
+        <div class="d-flex flex-row align-items-stretch pb-5">
+            <span class="border border-secondary rounded-circle profile z-1">
+                <img [src]="currentUser.base64">
+                <span class="border changeimg rounded-circle bg-white text-muted py-1 px-2" (click)="onOpenModalImg()">
+                    <i class="fas fa-camera"></i>
+                </span>
+            </span>
+            <div class="d-flex flex-column justify-content-center ms-4">
+                <h4 class="fs-4">{{currentUser.firstName == null? "Nome do Usuario" : (currentUser.firstName + ' ' +
+                    currentUser.lastName) }}</h4>
+                <h6 class="fs-6 text-muted">{{currentUser.email == null? "Email do Usuario" : currentUser.email}}</h6>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h6 class="card-title flex-fill">{{'profile.title' | translate }}</h6>
+                        <small class="card-subtitle text-muted">{{'profile.sub-title' | translate }}</small>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-6 form-group">
+                                <label>{{'profile.firstname' | translate }}</label>
+                                <input class="form-control" type="text" formControlName="firstName"
+                                    placeholder="{{'profile.firstname' | translate }}">
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('firstName')">
+                                    {{'validation.field' | translate }} " {{'profile.firstname' | translate }} "
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6 form-group">
+                                <label>{{'profile.lastname' | translate }}</label>
+                                <input class="form-control" type="text" formControlName="lastName"
+                                    placeholder="{{'profile.lastname' | translate }}">
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('lastName')">
+                                    {{'validation.field' | translate }} "{{'profile.lastname' | translate }}"
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 form-group">
+                                <label>{{'profile.enrollment' | translate }}</label>
+                                <input class="form-control" type="text" formControlName="enrollment" mask="9{10}"
+                                    placeholder="{{'profile.enrollment' | translate }}">
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('enrollment')">
+                                    {{'validation.field' | translate }} "{{'profile.enrollment' | translate }}"
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 form-group">
+                                <label>{{'profile.cellPhone' | translate }}</label>
+                                <input class="form-control" type="text" formControlName="cellPhone"
+                                    [prefix]=" '+' + (currentCountry != null ? currentCountry : '')"
+                                    mask=" (00) 00000-0000" placeholder="{{'profile.cellPhone' | translate }}">
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('cellPhone')">
+                                    {{'validation.field' | translate }} "{{'profile.cellPhone' | translate }}"
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 form-group">
+                                <label>{{'profile.department' | translate }}</label>
+                                <input class="form-control" type="text" formControlName="department"
+                                    placeholder="{{'profile.department' | translate }}">
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('department')">
+                                    {{'validation.field' | translate }} "{{'profile.department' | translate }}"
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 form-group">
+                                <label>{{'profile.email' | translate }}</label>
+                                <input class="form-control" type="email" formControlName="email"
+                                    placeholder="{{'profile.email' | translate }}">
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('email')">
+                                    {{'validation.field' | translate }} " {{'profile.email' | translate }} "
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 form-group" *ngIf="listCountries.length">
+                                <label>{{'profile.country' | translate }}</label>
+                                <ng-select formControlName="country" [items]="listCountries" bindLabel="name"
+                                    bindValue="id" [(ngModel)]="currentCountry"
+                                    placeholder="{{'profile.select-the' | translate }} {{'profile.country' | translate }}">
+                                    <ng-template ng-label-tmp let-item="item">
+                                        <img class="rounded-5 me-2" height="15" width="15" [src]="item.flag" />
+                                        {{item.name}}
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                                        <img class="rounded-5 me-2" height="15" width="15" [src]="item.flag" />
+                                        {{item.name}}
+                                    </ng-template>
+                                </ng-select>
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('country')">
+                                    {{'validation.field' | translate }} " {{'profile.country' | translate }} "
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 form-group">
+                                <label>{{'profile.timezone' | translate }}</label>
+                                <ng-select formControlName="timezone" [items]="listTimeZones" bindLabel="name"
+                                    bindValue="id"
+                                    placeholder="{{'profile.select-the' | translate }} {{'profile.timezone' | translate }}">
+                                    <ng-template ng-label-tmp let-item="item">
+                                        <i class="far fa-clock me-2"></i>
+                                        {{item.name}}
+                                    </ng-template>
+                                </ng-select>
+                                <div class="text-danger fw-bold" *ngIf="isInvalid('timezone')">
+                                    {{'validation.field' | translate }} " {{'profile.timezone' | translate }} "
+                                    {{'validation.invalid' | translate }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse mt-3 gap-4">
+                    <button class="btn btn-primary" type="submit">
+                        {{'save' | translate }}
+                    </button>
+                    <button class="btn btn-secondary">
+                        {{'cancel' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal" id="modalCropper" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-img-cropper (emitImg)="onSetProfileImg($event)"></app-img-cropper>
+            </div>
+        </div>
+    </div>
+</div>

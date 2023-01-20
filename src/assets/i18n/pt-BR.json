@@ -1,0 +1,33 @@
+{
+    "error": "Erro",
+    "not-found": "Pagina não encontrada",
+    "my-score": "Meus Pontos",
+    "time-sheet": "Folha de Ponto",
+    "overtime-request": "Requisição de Hora Extra",
+    "support": "Suporte",
+    "settings": "Configurações",
+    "validation": {
+        "field": "Campo ",
+        "invalid": "Inválido"
+    },
+    "profile": {
+        "title": "Informações Pessoais",
+        "sub-title": "Atualize sua foto e dados pessoais.",
+        "firstname": "Nome",
+        "lastname": "Sobrenome",
+        "enrollment": "Registro ou Matrícula",
+        "cellPhone": "Celular",
+        "department": "Departamento",
+        "email": "Email",
+        "country": "País",
+        "select-the": "Selecione o",
+        "timezone": "Fuso horário"
+    },
+    "confirm": "Confirma",
+    "confirm-message": "Deseja realmente Salvar as alterações no Perfil?",
+    "save": "Salvar",
+    "profile-saved": "Perfil salvo com sucesso",
+    "profile-not-saved": "Erro ao Salvar Perfil",
+    "drag-select": "Arraste ou selecione uma imagem",
+    "cancel": "Cancelar"
+}
